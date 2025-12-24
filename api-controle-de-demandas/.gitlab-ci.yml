@@ -1,0 +1,52 @@
+variables:
+  DOCKER_DRIVER: overlay2
+  IMAGE_NAME: timesheet-api 
+  
+stages:
+  - build
+  - deploy
+
+build:
+  image: docker:24.0.9
+  services:
+    - name: docker:24.0.9-dind
+  stage: build
+  only:
+    - main
+  script:  
+    - echo "nameserver 192.168.1.8" | tee /etc/resolv.conf
+    - echo "Gerando .env com variáveis do ambiente..."
+    - |
+      cat <<EOF > .env
+      DB_URL=${URL_BANCO}
+      DB_USER=${USUARIO_DO_BANCO}
+      DB_PASSWORD=${SENHA_DO_BANCO}
+      API_SECRET=AauzSC7tDvcf9AI1OQ2jGuR66ecliliJ
+      MAIL_HOST=${SERVIDOR_SMTP}
+      MAIL_PORT=25
+      MAIL_USER=${EMAIL_DE_ENVIO_SMTP:-documentos@valeshop.com.br}
+      MAIL_PASSWORD=${SENHA_DE_EMAIL_SMTP:-}
+      FRONTEND_URL=https://controle-demandas.valeshop.com.br
+      AZURE_CLIENT_ID=${AZURE_CLIENT_ID}
+      AZURE_TENANT_ID=${AZURE_TENANT_ID}
+      AZURE_CLIENT_SECRET=${AZURE_CLIENT_SECRET}
+      EOF
+    - echo "Conteúdo do .env:"
+    - cat .env
+
+    # 🔐 Login no registry
+    - docker login "$REGISTRY_ADDRESS" --username "$REGISTRY_USERNAME" --password "$REGISTRY_PASSWORD"    
+
+    
+    - docker build -t "$REGISTRY_ADDRESS/$IMAGE_NAME:latest" .
+
+    # 📤 Push da imagem para o registry
+    - docker push "$REGISTRY_ADDRESS/$IMAGE_NAME:latest"
+    
+deploy:
+  stage: deploy
+  only: 
+    - main
+  image: cdrx/rancher-gitlab-deploy
+  script:
+    - upgrade --environment "Default" --stack "Controle-Demandas" --service "timesheet-api" --new-image "$REGISTRY_ADDRESS/$IMAGE_NAME:latest"
