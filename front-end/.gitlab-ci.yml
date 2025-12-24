@@ -1,0 +1,34 @@
+variables:
+  DOCKER_DRIVER: overlay2
+  # Nome da imagem que será gerada. Mantenha consistente.
+  IMAGE_NAME: timesheet-frontend
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  image: docker:24.0.9
+  services:
+    - name: docker:24.0.9-dind
+  only:
+    - main # Executa apenas para a branch 'main'
+  script:
+    - echo "nameserver 192.168.1.8" | tee /etc/resolv.conf
+    - docker login "$REGISTRY_ADDRESS" --username "$REGISTRY_USERNAME" --password "$REGISTRY_PASSWORD"
+    
+    # Constrói a imagem Docker a partir do Dockerfile do projeto
+    - docker build -t "$REGISTRY_ADDRESS/$IMAGE_NAME:latest" .
+    
+    # Envia a imagem para o seu registry
+    - docker push "$REGISTRY_ADDRESS/$IMAGE_NAME:latest"
+
+deploy:
+  stage: deploy
+  only: 
+    - main # Executa apenas para a branch 'main'
+  image: cdrx/rancher-gitlab-deploy
+  script:
+    # Comando de upgrade com os nomes corretos do Rancher, retirados da sua imagem
+    - upgrade --environment "Default" --stack "Controle-Demandas" --service "timesheet-frontend" --new-image "$REGISTRY_ADDRESS/$IMAGE_NAME:latest"

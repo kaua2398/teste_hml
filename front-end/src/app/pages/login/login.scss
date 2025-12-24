@@ -1,0 +1,168 @@
+.login-form {
+  width: 100%;
+  max-width: 350px;
+    
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: #000000;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      margin-top: 1rem;
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    input {
+      padding: 0.6rem;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      background: #E5E5E5;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      padding: 0.7rem;
+      background: linear-gradient(135deg, #004075, #00569E);
+      color: white;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      border-radius: 30px;
+
+      &:hover {
+        background-color: #1565c0;
+      }
+    }
+  }
+
+  .register-link {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+    cursor: pointer;
+
+    a {
+      color: #00569E;
+      text-decoration: none;
+      font-weight: bold;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0 1rem 0;
+
+    .remember-me {
+      display: flex; 
+      align-items: center;
+      font-size: 0.8rem;
+      color: #333;
+      margin-bottom: 16px;
+
+      input[type="checkbox"] {
+        margin-right: 5px;
+        position: initial;
+        top: 0px;
+      }
+    }
+
+    .passforgot-link {
+      font-size: 0.8rem;
+      color: #00569E;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // Estilos adicionados para o divisor e o botão Microsoft
+  .divider {
+    text-align: center;
+    margin: 1.5rem 0;
+    color: #888;
+    display: flex;
+    align-items: center;
+
+    &::before, &::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid #ccc;
+    }
+
+    span {
+      padding: 0 1rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  .btn-microsoft {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.7rem;
+    background-color: #FFFFFF;
+    color: #5E5E5E;
+    border: 1px solid #8C8C8C;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    border-radius: 30px; // Mantendo o mesmo border-radius
+    margin-bottom: 1rem; // Adicionado para espaçamento antes do link de registro
+
+    .microsoft-logo {
+      margin-right: 0.75rem;
+      width: 21px;
+      height: 21px;
+    }
+
+    &:hover {
+      background-color: #F2F2F2;
+      border-color: #5E5E5E;
+    }
+  }
+
+  .error-message {
+    background: #ffdddd;
+    color: #b30000;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+    padding: 0.7rem;
+    margin: 1rem 0;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .success-message {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    padding: 0.7rem;
+    margin: 1rem 0;
+    text-align: center;
+    font-size: 1rem;
+  }
+}

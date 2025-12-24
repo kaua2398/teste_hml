@@ -1,0 +1,45 @@
+<app-auth-layout>
+  <div class="login-form">
+    <h2>Login</h2>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <label>Email</label>
+      <input type="email" placeholder="Digite seu email aqui" [(ngModel)]="credentials.email" name="email" required>
+
+      <label>Senha</label>
+      <input type="password" placeholder="Digite sua senha aqui" [(ngModel)]="credentials.password" name="password"
+        required>
+
+      <div class="options">
+        <label class="remember-me">
+          <input type="checkbox" [(ngModel)]="credentials.rememberMe" name="rememberMe" /> Lembrar de mim
+        </label>
+        <a routerLink="/forgot-password" class="passforgot-link">Esqueceu a senha?</a>
+      </div>
+
+      @if (errorMessage) {
+      <div class="error-message">{{ errorMessage }}</div>
+      }
+
+      <button type="submit">ENTRAR</button>
+    </form>
+
+    <div class="divider">
+      <span>OU</span>
+    </div>
+
+    <button type="button" class="btn-microsoft" (click)="loginWithMicrosoft()">
+      <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg"
+        class="microsoft-logo">
+        <path d="M1 1H9.5V9.5H1V1Z" fill="#F25022" />
+        <path d="M11.5 1H20V9.5H11.5V1Z" fill="#7FBA00" />
+        <path d="M1 11.5H9.5V20H1V11.5Z" fill="#00A4EF" />
+        <path d="M11.5 11.5H20V20H11.5V11.5Z" fill="#FFB900" />
+      </svg>
+      Entrar com Microsoft
+    </button>
+
+    <p class="register-link">
+      Ainda não tem uma conta? <a routerLink="/register">Cadastre-se!</a>
+    </p>
+  </div>
+</app-auth-layout>

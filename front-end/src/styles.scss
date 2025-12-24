@@ -1,0 +1,50 @@
+body {
+    background-color: #E5E5E5;
+    margin: 0px;
+    box-sizing: border-box;
+
+
+}
+
+.error-message {
+    margin-top: 1rem;
+    color: #D8000C;
+    background-color: #FFBABA;
+    padding: 0.5rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.status-badge {
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #fff;
+
+  &.status-iniciada {
+    background-color: #007bff;
+  }
+
+  &.status-aguardando-informação {
+    background-color: #6f42c1;
+  }
+
+  &.status-parada {
+    background-color: #dc3545;
+  }
+
+  &.status-autorizada-para-produção {
+    background-color: #ffc107;
+    color: #333
+  }
+
+  &.status-liberada-para-teste {
+    background-color: #17a2b8;
+  }
+
+  &.status-concluída {
+    background-color: #28a745;
+  }
+}

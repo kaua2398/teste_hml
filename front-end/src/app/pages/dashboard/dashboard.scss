@@ -1,0 +1,280 @@
+.dashboard-container {
+  padding: 1.5rem;
+  font-family: Arial, sans-serif;
+  max-width: 1400px;
+  margin: auto;
+}
+
+// Filtros
+.filtros-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.filtro-item select,
+.filtro-item input {
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #e0e0e0;
+  background-color: #f7f7f7;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.btn {
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+
+  &-aplicar {
+    background-color: #00569e;
+    color: white;
+    &:hover {
+      background-color: #004075;
+    }
+  }
+
+  &-limpar {
+    background-color: #f1f1f1;
+    color: #333;
+    border: 1px solid #ddd;
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
+}
+
+// Resumo
+.resumo-texto {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #00569e;
+}
+
+// Cards
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-titulo {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.card-valor {
+  font-size: 2.5rem; // Reduzido para caber 'dias'
+  font-weight: bold;
+  color: #333;
+  text-align: right;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 0.3rem;
+}
+
+.card-unidade {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #666;
+  padding-bottom: 0.5rem;
+}
+
+.card-funcionario {
+  .funcionario-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .avatar {
+    background-color: #e9ecef;
+    border-radius: 50%;
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #495057;
+  }
+  .funcionario-nome {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+}
+
+// Gráficos
+.graficos-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.grafico-card {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.grafico-titulo {
+  margin: 0 0 1rem 0;
+  text-align: center;
+  color: #333;
+}
+
+.grafico-wrapper {
+  position: relative;
+  flex-grow: 1;
+}
+
+// Tabela
+.tabela-container {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+  margin-bottom: 2rem;
+}
+
+.tabela-titulo {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.tabela-demandas {
+  width: 100%;
+  border-collapse: collapse;
+  
+  th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  thead th {
+    color: #666;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+
+  tbody tr:hover {
+    background-color: #f9f9f9;
+  }
+
+  .sem-dados {
+    text-align: center;
+    color: #888;
+    padding: 2rem;
+  }
+}
+
+
+.paginacao-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+  gap: 0.5rem;
+}
+
+.paginacao-container button {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  color: #00569e;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-weight: bold;
+}
+
+.paginacao-container button:hover:not(:disabled) {
+  background-color: #00569e;
+  color: #fff;
+}
+
+.paginacao-container button.active {
+  background-color: #00569e;
+  color: #fff;
+}
+
+.paginacao-container button:disabled {
+  background-color: #f0f0f0;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+
+// Responsividade
+@media (max-width: 992px) {
+  .graficos-container {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-container {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .filtros-container {
+    flex-direction: column;
+    align-items: stretch;
+    .filtro-item {
+      width: 100%;
+      label {
+        display: block;
+        margin-bottom: .25rem;
+      }
+      input, select {
+        width: 100%;
+      }
+    }
+  }
+
+  .card-valor {
+    font-size: 2rem;
+  }
+
+  .tabela-demandas {
+    th, td {
+      padding: 0.75rem 0.5rem;
+      font-size: 0.85rem;
+      white-space: nowrap; 
+    }
+  }
+}

@@ -1,0 +1,41 @@
+<div class="header-container" [class.header-hidden]="isHidden">
+  <img routerLink="/" src="/imagens/logo-valeshop.png" alt="Vale Shop Logo" />
+  <link rel="icon" type="image/x-icon" href="assets/image/VALE SHOP ICO.ico">
+
+  <!-- Navegação para Desktop -->
+  <div class="nav-links">
+    @if (isLoggedIn$ | async) {
+      @if (isAdmin$ | async) {
+        <a routerLink="/dashboard">Dashboard</a>
+        <a routerLink="/demandas">Demandas</a>
+        <a (click)="logout()" class="logout-link">Sair</a>
+      } @else {
+        <a routerLink="/demandas">Demandas</a>
+        <a routerLink="/cadastro-demanda">Cadastro de Demanda</a>
+        <a (click)="logout()" class="logout-link">Sair</a>
+      }
+    }
+  </div>
+
+  <!-- Botão do Menu Móvel -->
+  @if(isLoggedIn$ | async) {
+    <button class="menu-toggle" (click)="toggleMenu()">
+      &#9776; <!-- Ícone Hambúrguer -->
+    </button>
+  }
+</div>
+
+<!-- Menu de Navegação Móvel -->
+@if(isLoggedIn$ | async) {
+  <div class="mobile-nav" [class.open]="isMenuOpen">
+    @if (isAdmin$ | async) {
+      <a routerLink="/dashboard" (click)="toggleMenu()">Dashboard</a>
+      <a routerLink="/demandas" (click)="toggleMenu()">Demandas</a>
+      <a (click)="logout()">Sair</a>
+    } @else {
+      <a routerLink="/demandas" (click)="toggleMenu()">Demandas</a>
+      <a routerLink="/cadastro-demanda" (click)="toggleMenu()">Cadastro de Demanda</a>
+      <a (click)="logout()">Sair</a>
+    }
+  </div>
+}

@@ -1,0 +1,121 @@
+.cadastroDemanda-form {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cadastroDemanda-form h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #000;
+  font-family: Arial, sans-serif;
+}
+
+.red{ 
+  color: red;
+}
+.cadastroDemanda-form .descricao {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.cadastroDemanda-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.cadastroDemanda-form label {
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: #000000;
+  font-family: Arial, sans-serif;
+}
+
+.cadastroDemanda-form input,
+.cadastroDemanda-form select,
+.cadastroDemanda-form textarea {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  background: #E5E5E5;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: #00569E;
+    outline: none;
+  }
+
+  &.invalid {
+    border-color: #d32f2f;
+    background-color: #fff8f8;
+  }
+}
+
+.cadastroDemanda-form textarea {
+  min-height: 120px;
+  resize: vertical;
+  border-radius: 15px;
+}
+
+.cadastroDemanda-form .linha {
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.cadastroDemanda-form .campo, .cadastroDemanda-form .campo-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.relative-container {
+  position: relative;
+}
+
+.char-counter {
+  align-self: flex-end; 
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 0.2rem;
+  margin-right: 0.5rem; 
+}
+
+.error-msg {
+  color: #d32f2f;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  margin-left: 0.5rem;
+  font-weight: bold;
+}
+
+.cadastroDemanda-form button {
+  margin-top: 2rem;
+  padding: 0.7rem;
+  background: linear-gradient(135deg, #004075, #00569E);
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+@media (max-width: 768px) {
+  .cadastroDemanda-form .linha {
+    grid-template-columns: 1fr; 
+    gap: 0; 
+  }
+}

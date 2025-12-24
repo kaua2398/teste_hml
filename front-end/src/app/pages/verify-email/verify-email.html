@@ -1,0 +1,27 @@
+<app-auth-layout>
+  <div class="verify-email-container">
+    @if(verificationStatus === "verifying"){
+    <div>
+      <h2>Verificando...</h2>
+      <p>{{ message }}</p>
+    </div>
+    }
+    
+    <!-- Você pode adicionar um spinner aqui para uma melhor UX -->
+    @if(verificationStatus === "success"){
+    <div>
+      <h2 class="success-title">E-mail Verificado!</h2>
+      <p>{{ message }}</p>
+      <a routerLink="/login" class="login-button">Ir para Login</a>
+    </div>
+    }
+
+    @if(verificationStatus === "error"){
+    <div>
+      <h2 class="error-title">Erro na Verificação</h2>
+      <p>{{ message }}</p>
+      <a routerLink="/login" class="login-button">Voltar para Login</a>
+    </div>
+    }
+  </div>
+</app-auth-layout>

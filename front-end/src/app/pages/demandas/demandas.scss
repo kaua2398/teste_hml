@@ -1,0 +1,253 @@
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 8px 12px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 550px;
+  /* Ajuste conforme necessário */
+  width: 100%;
+  margin: 20px auto;
+}
+
+.search-bar label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.search-bar input {
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: bold;
+  font-size: 12px;
+  transition: background 0.3s;
+  width: 70%;
+}
+
+.search-bar input:hover {
+  background-color: #d6d6d6;
+}
+
+// Filtros
+.filtros-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.filtro-item select,
+.filtro-item input {
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #e0e0e0;
+  background-color: #f7f7f7;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+
+.btn {
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+
+  &-aplicar {
+    background-color: #00569e;
+    color: white;
+    &:hover {
+      background-color: #004075;
+    }
+  }
+
+  &-limpar {
+    background-color: #f1f1f1;
+    color: #333;
+    border: 1px solid #ddd;
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
+}
+
+.demanda-card {
+  padding: 16px;
+  font-family: Arial, sans-serif;
+}
+
+.demanda-card h2 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+}
+
+.demanda-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.demanda-info .status {
+  color: #00569e;
+  font-weight: bold;
+}
+
+.demanda-desc {
+  font-size: 13px;
+  color: #444;
+  margin-bottom: 12px;
+}
+
+.demanda-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  /* Alinha os botões à direita */
+}
+
+.btn {
+  border: none;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #004075, #00569E);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #003763, #004b8a);
+}
+
+.btn-danger {
+  background-color: #d32f2f;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background-color: #c62828;
+}
+
+/* Loading and Empty States */
+.loading-container,
+.empty-state-container {
+  text-align: center;
+  padding: 4rem 2rem;
+  margin: 1rem 90px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.empty-state-container h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.empty-state-container p {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.empty-state-container .create-demand-btn {
+  font-size: 1rem;
+  padding: 0.7rem 1.5rem;
+}
+
+/* Estilos de Paginação */
+.paginacao-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  gap: 0.5rem;
+}
+
+.paginacao-container button {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  color: #00569e;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-weight: bold;
+}
+
+.paginacao-container button:hover:not(:disabled) {
+  background-color: #00569e;
+  color: #fff;
+}
+
+.paginacao-container button.active {
+  background-color: #00569e;
+  color: #fff;
+}
+
+.paginacao-container button:disabled {
+  background-color: #f0f0f0;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+
+@media (max-width: 768px) {
+  .search-bar {
+    width: 90%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+
+    input {
+      width: 70%;
+    }
+  }
+
+  .demanda-info {
+    gap: 10px;
+    font-size: 12px;
+  }
+
+  .loading-container,
+  .empty-state-container {
+    margin: 1rem;
+  }
+
+  .filtros-container {
+    flex-direction: column;
+    align-items: stretch;
+
+    .filtro-item {
+      width: 100%;
+
+      label {
+        display: block;
+        margin-bottom: .25rem;
+      }
+
+      input,
+      select {
+        width: 100%;
+      }
+    }
+  }
+
+}

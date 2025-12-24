@@ -1,0 +1,18 @@
+# Dependencies
+node_modules
+
+# Angular cache
+.angular
+
+# Build output
+dist
+
+# Git
+.git
+.gitignore
+
+# IDE configs
+.vscode
+
+# Logs
+npm-debug.log

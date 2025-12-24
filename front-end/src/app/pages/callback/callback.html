@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="spinner"></div>
+  <p>Autenticando, por favor aguarde...</p>
+  <p>Esta janela fechará automaticamente.</p>
+  
+  @if (errorMessage) {
+    <p class="error">
+      <strong>Ocorreu um erro:</strong> {{ errorMessage }}
+    </p>
+  }
+</div>

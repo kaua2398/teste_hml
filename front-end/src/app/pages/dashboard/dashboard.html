@@ -1,0 +1,156 @@
+<div class="dashboard-container">
+  <!-- Seção de Filtros -->
+  <div class="filtros-container">
+    <div class="filtro-item">
+      <select [(ngModel)]="filtros.funcionarioId">
+        <option value="todos">Todos Funcionários</option>
+        @for(usuario of usuarios; track usuario.id) {
+          <option [value]="usuario.id">{{ getNomeAbreviado(usuario.email) }}</option>
+        }
+      </select>
+    </div>
+    <div class="filtro-item">
+      <select [(ngModel)]="filtros.prioridade">
+        <option value="todas">Todas Prioridades</option>
+        <option value="1">1ª</option>
+        <option value="2">2ª</option>
+        <option value="3">3ª</option>
+        <option value="4">4ª</option>
+        <option value="5">5ª</option>
+        <option value="6">6ª</option>
+        <option value="7">7ª</option>
+        <option value="8">8ª</option>
+        <option value="9">9ª</option>
+        <option value="10">10ª</option>
+      </select>
+    </div>
+    <div class="filtro-item">
+      <label for="dataInicio">De:</label>
+      <input type="date" id="dataInicio" [(ngModel)]="filtros.dataInicio" />
+    </div>
+    <div class="filtro-item">
+      <label for="dataFim">Até:</label>
+      <input type="date" id="dataFim" [(ngModel)]="filtros.dataFim" />
+    </div>
+    <button class="btn btn-aplicar" (click)="aplicarFiltros()">Aplicar</button>
+    <button class="btn btn-limpar" (click)="limparFiltros()">Limpar Filtro</button>
+  </div>
+
+  <!-- Resumo -->
+  <p class="resumo-texto">{{ resumoTexto }}</p>
+
+  <!-- Cards de Estatísticas -->
+  <div class="cards-container">
+    <div class="card">
+      <div class="card-titulo">Total de demandas ativas</div>
+      <div class="card-valor">{{ totalDemandasAtivas }}</div>
+    </div>
+    <div class="card">
+      <div class="card-titulo">Demandas Concluídas</div>
+      <div class="card-valor">{{ demandasConcluidas }}</div>
+    </div>
+    <!-- Card de Demandas Atrasadas removido -->
+    <div class="card">
+      <div class="card-titulo">Tempo Médio de Resolução</div>
+      <div class="card-valor">{{ (tempoMedioResolucaoGeral * 8) | number:'1.0-1' }} <span class="card-unidade"> Horas</span></div>
+    </div>
+    <div class="card card-funcionario">
+      <div class="card-titulo">Funcionário com mais demandas</div>
+      <div class="funcionario-info">
+        <div class="avatar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="auto" height="auto" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+          </svg>
+        </div>
+        <div class="funcionario-nome">{{ funcionarioComMaisDemandas.nome }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gráficos -->
+  <div class="graficos-container">
+    <div class="grafico-card">
+      <h3 class="grafico-titulo">Demandas por funcionário</h3>
+      <div class="grafico-wrapper">
+        <canvas #demandasPorFuncionarioChart></canvas>
+      </div>
+    </div>
+    <div class="grafico-card">
+      <h3 class="grafico-titulo">Total de demandas por período</h3>
+      <div class="grafico-wrapper">
+        <!-- Canvas atualizado para o novo gráfico -->
+        <canvas #totalDemandasPorPeriodoChart></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabela de Demandas Recentes -->
+  <div class="tabela-container">
+    <h3 class="tabela-titulo">Demandas Recentes</h3>
+    <table class="tabela-demandas">
+      <thead>
+        <tr>
+          <th>Funcionário</th>
+          <th>Título da Demanda</th>
+          <th>Prioridade</th>
+          <th>Status</th>
+          <th>Prazo</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(demanda of demandasPaginadas; track demanda.id) {
+          <tr>
+            <td>{{ getNomeAbreviado(demanda.owner) }}</td>
+            <td>{{ demanda.title }}</td>
+            <td>{{ demanda.priority }}</td>
+            <td>
+              <span class="status-badge status-{{demanda.status | lowercase | replace: ' ': '-'}}">
+                {{ demanda.status }}
+              </span>
+            </td>
+            <td>{{ demanda.date | date:'dd/MM/yyyy' }}</td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="5" class="sem-dados">Nenhuma demanda encontrada com os filtros aplicados.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <!-- Controles de Paginação -->
+    @if (demandasFiltradas.length > itensPorPagina) {
+      <div class="paginacao-container">
+        <button (click)="paginaAnterior()" [disabled]="paginaAtual === 1">Anterior</button>
+        @for(pagina of getPaginas(); track pagina) {
+          <button (click)="irParaPagina(pagina)" [class.active]="pagina === paginaAtual">{{ pagina }}</button>
+        }
+        <button (click)="proximaPagina()" [disabled]="paginaAtual === totalPaginas()">Próxima</button>
+      </div>
+    }
+  </div>
+
+  <!-- Tabela de Tempo Médio por Usuário -->
+  <div class="tabela-container">
+    <h3 class="tabela-titulo">Tempo Médio de Resolução por Usuário</h3>
+    <table class="tabela-demandas">
+      <thead>
+        <tr>
+          <th>Funcionário</th>
+          <th>Tempo Médio (dias)</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(item of tempoMedioPorUsuario; track item.nome) {
+          <tr>
+            <td>{{ item.nome }}</td>
+            <td>{{ (item.tempoMedio * 8) | number:'1.0-1' }}</td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="2" class="sem-dados">Nenhuma demanda concluída para calcular o tempo médio.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

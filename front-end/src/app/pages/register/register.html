@@ -1,0 +1,33 @@
+<app-auth-layout>
+  <div class="register-form">
+
+    <button class="btn-voltar" type="button" routerLink="/login"> Voltar </button>
+
+    <h2>Cadastro</h2>
+
+    <form (ngSubmit)="onSubmit()">
+      
+
+      <label>Email</label>
+      <input type="email" placeholder="Digite seu email aqui" [(ngModel)]="credentials.email" name="email" required>
+
+      <label>Senha</label>
+      <input type="password" placeholder="Digite sua senha aqui" [(ngModel)]="credentials.password" name="password"
+        required>
+
+      <label>Confirme sua senha</label>
+      <input type="password" placeholder="Confirme sua senha aqui" [(ngModel)]="credentials.confirmPassword"
+        name="confirmPassword" required>
+
+      @if (errorMessage) {
+      <div class="error-message">{{ errorMessage }}</div>
+      }
+
+      <button type="submit">CADASTRAR</button>
+    </form>
+
+    <p class="login-link">
+      Já possui uma conta? <a routerLink="/login">Login!</a>
+    </p>
+  </div>
+</app-auth-layout>

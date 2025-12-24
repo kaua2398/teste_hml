@@ -1,0 +1,42 @@
+.verify-email-container {
+  text-align: center;
+  padding: 2rem;
+  width: 100%;
+  max-width: 450px;
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+  }
+
+  .success-title {
+    color: #28a745;
+  }
+
+  .error-title {
+    color: #d32f2f;
+  }
+
+  .login-button {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    background: linear-gradient(135deg, #004075, #00569e);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: linear-gradient(135deg, #003763, #004b8a);
+    }
+  }
+}

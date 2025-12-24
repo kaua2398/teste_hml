@@ -1,0 +1,73 @@
+<app-container>
+  <div class="cadastroDemanda-form">
+    <h2><b>{{ pageTitle }}</b></h2>
+    <p class="descricao">{{ pageDescription }}</p>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      
+      <div class="campo-container">
+        <label>Título da demanda <span class="red">*</span></label>
+        <input 
+          type="text" 
+          placeholder="Digite o título da demanda" 
+          formControlName="title"
+          [class.invalid]="hasError('title')">
+        
+        @if (hasError('title'); as error) {
+          <div class="error-msg">{{ error }}</div>
+        }
+      </div>
+
+      <div class="linha">
+        <div class="campo">
+          <label>Status <span class="red">*</span></label>
+          <select 
+            formControlName="status"
+            [class.invalid]="hasError('status')">
+            <option value="" disabled selected>Selecione</option>
+            <option value="Parada">Parada</option>
+            <option value="Iniciada">Iniciada</option>
+            <option value="Aguardando informação">Aguardando informação</option>
+            <option value="Autorizada para Produção">Autorizada para Produção</option>
+            <option value="Liberada para Teste">Liberada para Teste</option>
+            <option value="Concluída">Concluída</option>
+          </select>
+          @if (hasError('status'); as error) {
+            <div class="error-msg">{{ error }}</div>
+          }
+        </div>
+
+        <div class="campo">
+          <label>Link do GitLab <span class="red">*</span></label>
+          <input 
+            type="text" 
+            placeholder="Cole o link do GitLab (opcional) " 
+            formControlName="gitLink"
+            [class.invalid]="hasError('gitLink')">
+          @if (hasError('gitLink'); as error) {
+            <div class="error-msg">{{ error }}</div>
+          }
+        </div>
+      </div>
+
+      <div class="campo-container relative-container">
+        <label>Descrição detalhada <span class="red">*</span></label>
+        <textarea 
+          placeholder="Descreva a demanda com detalhes..." 
+          formControlName="description"
+          maxlength="65535"
+          [class.invalid]="hasError('description')"></textarea>
+        
+        <div class="char-counter">
+          {{ descriptionLength }} / 65.535
+        </div>
+
+        @if (hasError('description'); as error) {
+          <div class="error-msg">{{ error }}</div>
+        }
+      </div>
+
+      <button type="submit">{{ isEditMode ? 'ATUALIZAR DEMANDA' : 'ENVIAR DEMANDA' }}</button>
+    </form>
+  </div>
+</app-container>
